@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/sidebar.css">
+    <link rel="stylesheet" href="./styles/main.css">
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div id="sidebar"></div>
+      <div id="main">
+        <!--No need to add sidebar here, directly display search results-->
+
+        <!-- show headline, description and image -->
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+
+</html>
+<script type="module">
+  import sidebar from "./components/sidebar.js"
+
+  document.querySelector("#sidebar").innerHTML = sidebar();
+
+  var search = localStorage.getItem("search_term");
+
+  document.title = search;
+
+  var url = ` https://shrouded-earth-23381.herokuapp.com/api/search/?q=${search}`;
+
+  import { apiCall, appendArticles } from "./scripts/main.js";
+  var response = apiCall(url);
+  response.then((res) => {
+    console.log(res);
+
+    var body = document.querySelector("#main");
+    body.innerHTML = null;
+
+    appendArticles(res, body);
+  });
+
+  import storeSearchterm from "./scripts/search.js";
+
+  
+  document.querySelector("#sidebar_search_button").addEventListener("click", function(event){
+    event.preventDefault();
+    var search = document.querySelector("#searchbar").value;
+    storeSearchterm(search);
+  });
+</script>

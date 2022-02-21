@@ -1,0 +1,42 @@
+body{
+    margin: 0;
+  }
+  #sidebar_main_div{
+    width: 100%;
+    height: 755px;
+    border: 1px solid black;
+    background-color:white;
+    font-family: sans-serif;
+  }
+  #sidebar_home_link{
+    color: white;
+    text-decoration: none;
+  }
+  #sidebar_home_link>h1{
+    text-align: center;
+  }
+  #searchbar, #sidebar_search_button{
+    font-size: x-large;
+    color: rgb(228, 240, 240);
+    background-color: gray;
+    border: 1px solid rgb(8, 8, 8);
+    margin: 10px;
+  }
+  #searchbar::placeholder{
+    color: aliceblue;
+  }
+  #sidebar_search_button{
+    text-align: center;
+    padding: 5px 20px;
+    cursor: black;
+    background-color: white;
+    color: gray;
+    font-weight: bolder;
+    
+  }
+  .sidevars{
+    border: 1px solid gray;
+    width: 300px;
+    margin: 1%;
+    height: 30px;
+  }

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/sidebar.css">
+    <link rel="stylesheet" href="./styles/news.css">
+    <title>Document</title>
+  </head>
+
+  <body>
+    <!--DO NOT CHANGE THIS ID's-->
+
+    <div id="container">
+      <div id="sidebar">
+        <!--add your sidebar component here-->
+      </div>
+
+      <div id="main">
+        <div id="headline">
+          <!--add headline here-->
+        </div>
+        <img src="" id="img" alt="Image Related of Article"/>
+        <!--show news image here-->
+
+
+        <div id="content">
+          <!--add news content here-->
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>
+<script type="module">
+  import sidebar from "./components/sidebar.js"
+
+  document.querySelector("#sidebar").innerHTML = sidebar();
+
+  var news = JSON.parse(localStorage.getItem("news"));
+  showData(news);
+
+  function showData(obj){
+    // console.log(obj);
+
+    var headline = document.querySelector("#headline");
+      headline.innerHTML = null;
+
+    var h1 = document.createElement("h1");
+      h1.textContent = obj.article_title;
+      h1.style.textAlign = "center";
+      h1.style.width = "70%";
+      h1.style.margin = "auto";
+
+    headline.append(h1);
+
+
+
+    var image = document.querySelector("#img");
+      image.src = null;
+      image.src = obj.article_image;
+
+
+
+
+    var content = document.querySelector("#content");
+      content.innerHTML = null;
+
+    var publisher = document.createElement("h3");
+      publisher.innerText = obj.article_publishby;
+
+    var date = document.createElement("h4");
+      date.innerText = obj.article_publishat;
+    
+    var main_content = document.createElement("p");
+      main_content = obj.article_content;
+
+    var des = document.createElement("p");
+      des.innerText = "Short Description: "+obj.article_describe;
+
+    content.append(publisher, date, des, main_content);
+      
+    document.title = obj.article_title;
+  }
+
+  import storeSearchterm from "./scripts/search.js";
+  
+  document.querySelector("#sidebar_search_button").addEventListener("click", function(event){
+    event.preventDefault();
+    var search = document.querySelector("#searchbar").value;
+    storeSearchterm(search);
+  });
+
+</script>
